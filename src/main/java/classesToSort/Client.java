@@ -3,15 +3,11 @@ package classesToSort;
 import java.util.ArrayList;
 import java.util.List;
 
-// ДЕЛАТЬ ВСЕ ИЗМЕНЯЕМЫМ ИЛИ НЕТ?
-
-// СДЕЛАТЬ BUILDER ДЛЯ КЛИЕНТА И ДЛЯ КОНТАКТНЫХ ДАНННЫХ
-
 public final class Client {
     private final String name;
     private final Credentials credentials;
     private final int idNumber;
-    private final List<Order> orderHistory = new ArrayList<>();
+//    private final List<Order> orderHistory = new ArrayList<>();
 
     public Client(ClientBuilder clientBuilder) {
         this.name = clientBuilder.name;
@@ -29,7 +25,7 @@ public final class Client {
             return this;
         }
 
-        public ClientBuilder credentials(Credentials credentials){
+        private ClientBuilder credentials(Credentials credentials){
             this.credentials = credentials;
             return this;
         }
@@ -49,7 +45,7 @@ public final class Client {
         return name;
     }
 
-    public Credentials getCredentials() { // public or private???
+    private Credentials getCredentials() { // public or private???
         return credentials;
     }
 
@@ -57,12 +53,12 @@ public final class Client {
         return idNumber;
     }
 
-    public List<Order> getOrderHistory() {
-        return orderHistory; // ВОЗВРАЩАТЬ КОЛЛЕКЦИЮ ИЛИ КОПИЮ СПИСКА???
-    }
+//    public List<Order> getOrderHistory() {
+//        return List.copyOf(orderHistory);
+//    }
 
     private static class Credentials{ // ДЕЛАТЬ ВЛОЖЕННЫМ ИЛИ НЕТ
-        private final long phoneNumber;
+        private final String phoneNumber;
         private final String address;
         private final String email;
 
@@ -73,11 +69,11 @@ public final class Client {
         }
 
         public static class CredBuilder{
-            private long phoneNumber;
+            private String phoneNumber;
             private String address;
             private String email;
 
-            public CredBuilder phoneNumber(long phoneNumber){
+            public CredBuilder phoneNumber(String phoneNumber){
                 this.phoneNumber = phoneNumber;
                 return this;
             }
@@ -97,7 +93,7 @@ public final class Client {
             }
         }
 
-        public long getPhoneNumber() {
+        public String getPhoneNumber() {
             return phoneNumber;
         }
 
