@@ -56,8 +56,7 @@ public interface Printable {
         System.out.println(
                 "Sort clients by:\n" +
                         "1) Phone numbers\n" +
-                        "2) Addresses\n" +
-                        "3) Emails\n"
+                        "2) Emails\n"
         );
     }
 
@@ -72,14 +71,6 @@ public interface Printable {
                         "6) Clean number\n" + // без знаков
                         "7) Combine criteria\n"
 
-        );
-    }
-
-    default void printAddressesSortingOption(){
-        System.out.println(
-                "Sort clients by address:\n" + // так как в одну строку то меньше опций
-                        "1) In alphabetic order\n" +
-                        "2) Postal code\n"
         );
     }
 

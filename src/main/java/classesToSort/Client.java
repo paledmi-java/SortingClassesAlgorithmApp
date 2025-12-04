@@ -59,27 +59,19 @@ public final class Client {
 
     private static class Credentials{ // ДЕЛАТЬ ВЛОЖЕННЫМ ИЛИ НЕТ
         private final String phoneNumber;
-        private final String address;
         private final String email;
 
         public Credentials(CredBuilder credBuilder) {
             this.phoneNumber = credBuilder.phoneNumber;
-            this.address = credBuilder.address;
             this.email = credBuilder.email;
         }
 
         public static class CredBuilder{
             private String phoneNumber;
-            private String address;
             private String email;
 
             public CredBuilder phoneNumber(String phoneNumber){
                 this.phoneNumber = phoneNumber;
-                return this;
-            }
-
-            public CredBuilder address(String address){
-                this.address = address;
                 return this;
             }
 
@@ -95,10 +87,6 @@ public final class Client {
 
         public String getPhoneNumber() {
             return phoneNumber;
-        }
-
-        public String getAddress() {
-            return address;
         }
 
         public String getEmail() {
