@@ -1,16 +1,30 @@
-package interfaces;
-
-import java.lang.reflect.Array;
+package userInterface;
 
 public interface Printable {
 
     default void printMainMenu(){
         System.out.println(
+                "1) Fill the client database\n" +
+                        "2) Show sorting options"
+        );
+    }
+
+    default void printFillingDatabaseMenu(){
+        System.out.println(
+                "Fill database: \n" +
+                        "1) Manual input\n" +
+                        "2) File\n" +
+                        "3) Random"
+        );
+    }
+
+    default void printSortingMenu(){
+        System.out.println(
                 "Chose an option:\n" +
                         "1) Show clients in default order\n" +
                         "2) Sort by name\n" +
                         "3) Sort by ID\n" +
-                        "4) Sort by credentials"
+                        "4) Sort by phone number"
         );
     }
 
@@ -19,20 +33,11 @@ public interface Printable {
                 "Sort clients by:\n" +
                         "1) Names alphabet order\n" +
                         "2) Name length\n" +
-                        "3) Amount of a's in name\n" +
-                        "4) Amount of vowels in name\n" +
-                        "5) Amount of consonants in name\n" +
-                        "6) Name unicode\n" +
-                        "7) Name locale\n" + // Тут все сложно
-                        "8) Combine name criteria" // Придумать что-то комбинированное
-        );
-    }
-
-    default void printLettersCaseOption(){
-        System.out.println(
-                "Chose an option:\n" +
-                        "1) Case-sensitive sorting\n" +
-                        "2) Case-insensitive sorting\n"
+                        "3) Amount of vowels in name\n" +
+                        "4) Amount of consonants in name\n" +
+                        "5) Name unicode\n" +
+                        "6) Combine name criteria\n" + // Придумать что-то комбинированное
+                        "0) Go back"
         );
     }
 
@@ -43,20 +48,11 @@ public interface Printable {
                         "2) ID Descending \n" +
                         "3) Amount of numbers in ID\n" +
                         "4) ID even number\n" + // ЭТО ДОП ЗАДАНИЕ
-                        "5) ID odd number\n" +
+                        "5) ID odd number\n" + // ЭТО ДОП ЗАДАНИЕ
                         "6) Unicode\n" +
                         "7) Combine criteria\n" +
-                        "8) ID parts\n" + // если сделать ID составной
                         "9) ID creation date" // если сделать ID включающим дату
 
-        );
-    }
-
-    default void printCredentialsMenu(){
-        System.out.println(
-                "Sort clients by:\n" +
-                        "1) Phone numbers\n" +
-                        "2) Emails\n"
         );
     }
 
@@ -73,15 +69,4 @@ public interface Printable {
 
         );
     }
-
-    default void printEmailSortingOptions(){
-        System.out.println(
-                "Sort clients by email:\n" +
-                        "1) Domain name\n" +
-                        "2) Local part\n" +
-                        "3) Domain type\n" +
-                        "4) Length\n"
-        );
-    }
-
 }
