@@ -55,10 +55,10 @@ public class MenuManager implements Printable {
             int fillSortOption = Integer.parseInt(input);
 
             switch (fillSortOption){
-                case 1 -> fillDefaultOrder();
-                case 2 -> fillSortOfName();
-                case 3 -> fillSortOfID();
-                case 4 -> fillSortOfPhoneNumber();
+                case 1 -> printDefaultOrder();
+                case 2 -> printSortOfName();
+                case 3 -> printSortOfID();
+                case 4 -> printSortOfPhoneNumber();
                 case 5 -> System.out.println("Возврат в главное меню...");
             }
         } catch (NumberFormatException e){
@@ -95,19 +95,19 @@ public class MenuManager implements Printable {
         System.out.println("Выбран способ ввода случайных данных");
     }
 
-    private void fillDefaultOrder(){
+    private void printDefaultOrder(){
         System.out.println("Список клиентов");
     }
 
-    private void fillSortOfName(){
+    private void printSortOfName(){
         System.out.println("Сортировка по Имени");
     }
 
-    private void fillSortOfID(){
+    private void printSortOfID(){
         System.out.println("Сортировка по ID");
     }
 
-    private void fillSortOfPhoneNumber(){
+    private void printSortOfPhoneNumber(){
         System.out.println("Сортировка по номеру телефона");
     }
 }
