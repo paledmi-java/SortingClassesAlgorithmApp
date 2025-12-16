@@ -56,9 +56,9 @@ public class MenuManager implements Printable {
 
             switch (fillSortOption){
                 case 1 -> printDefaultOrder();
-                case 2 -> printSortOfName();
-                case 3 -> printSortOfID();
-                case 4 -> printSortOfPhoneNumber();
+                case 2 -> printNameSortingOptions();
+                case 3 -> printIdSortingOptions();
+                case 4 -> printPhoneSortingOptions();
                 case 5 -> System.out.println("Возврат в главное меню...");
             }
         } catch (NumberFormatException e){
@@ -85,29 +85,38 @@ public class MenuManager implements Printable {
     }
     private void fillManually(){
         System.out.println("Выбран способ ввода данных вручную");
+        System.out.println("Введите данные...");
+        String input = scanner.nextLine().trim();
+        System.out.println("Данные успешно сохранены");
+
     }
 
     private void fillFromFile(){
-        System.out.println("Выбран способ ввода данных из файла");
+        System.out.println("Выбран способ ввода данных из файла\n");
+        System.out.println("Введите путь к файлу: ");
+        String filePath = scanner.nextLine().trim();
+        System.out.println("Загрузка из файла: " + filePath);
+
     }
 
     private void fillRandom(){
         System.out.println("Выбран способ ввода случайных данных");
+        System.out.println("Сколько записей создать? ");
+        String input = scanner.nextLine().trim();
+        try {
+            int count = Integer.parseInt(input);
+            if (count > 0) {
+                System.out.println("Будет создано " + count + "Случайных записей");
+            }
+            else {
+                System.out.println("Должна быть как минимум одна запись!");
+            }
+        } catch (NumberFormatException e){
+            System.out.println("Пожалуйста, введите количество записей");
+        }
     }
 
     private void printDefaultOrder(){
         System.out.println("Список клиентов");
-    }
-
-    private void printSortOfName(){
-        System.out.println("Сортировка по Имени");
-    }
-
-    private void printSortOfID(){
-        System.out.println("Сортировка по ID");
-    }
-
-    private void printSortOfPhoneNumber(){
-        System.out.println("Сортировка по номеру телефона");
     }
 }
