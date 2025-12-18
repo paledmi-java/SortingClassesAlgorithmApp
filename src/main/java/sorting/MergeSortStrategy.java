@@ -1,0 +1,102 @@
+package sorting;
+
+import dto.Client;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class MergeSortStrategy implements SortingStrategy {
+
+    @Override
+    public void sort(List<Client> clients) {
+        Comparator<Client> comparator = createDefaultComparator();
+        sortWithComparator(clients, comparator);
+    }
+
+    public void sortWithComparator(List<Client> clients, Comparator<Client> comparator) {
+        if (clients == null || clients.size() <= 1) {
+            return;
+        }
+
+        mergeSort(clients, 0, clients.size() - 1, comparator);
+    }
+
+    @Override
+    public String getStrategyName() {
+        return "Merge Sort (сортировка слиянием)";
+    }
+
+    private Comparator<Client> createDefaultComparator() {
+        return new Comparator<Client>() {
+            @Override
+            public int compare(Client client1, Client client2) {
+                int nameComparison = client1.getName().compareTo(client2.getName());
+                if (nameComparison != 0) {
+                    return nameComparison;
+                }
+
+                int idComparison = Integer.compare(client1.getIdNumber(), client2.getIdNumber());
+                if (idComparison != 0) {
+                    return idComparison;
+                }
+
+                return client1.getPhoneNumber().compareTo(client2.getPhoneNumber());
+            }
+        };
+    }
+    private void mergeSort(List<Client> clients, int left, int right,
+                           Comparator<Client> comparator) {
+
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            mergeSort(clients, left, mid, comparator);
+
+            mergeSort(clients, mid + 1, right, comparator);
+
+            merge(clients, left, mid, right, comparator);
+        }
+    }
+
+
+    private void merge(List<Client> clients, int left, int mid, int right,
+                       Comparator<Client> comparator) {
+
+        List<Client> temp = new ArrayList<>();
+
+        int i = left;
+        int j = mid + 1;
+
+
+        while (i <= mid && j <= right) {
+            Client leftClient = clients.get(i);
+            Client rightClient = clients.get(j);
+
+
+            int comparison = comparator.compare(leftClient, rightClient);
+
+
+            if (comparison <= 0) {
+                temp.add(leftClient);
+                i++;
+            } else {
+                temp.add(rightClient);
+                j++;
+            }
+        }
+
+        while (i <= mid) {
+            temp.add(clients.get(i));
+            i++;
+        }
+
+        while (j <= right) {
+            temp.add(clients.get(j));
+            j++;
+        }
+
+        for (int k = 0; k < temp.size(); k++) {
+            clients.set(left + k, temp.get(k));
+        }
+    }
+}
