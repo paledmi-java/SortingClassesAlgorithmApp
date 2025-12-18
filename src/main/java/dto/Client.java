@@ -1,6 +1,6 @@
 package dto;
 
-public final class Client {
+public final class Client { //DTO
     private final String name;
     private final String phoneNumber;
     private final int idNumber;
