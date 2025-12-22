@@ -9,5 +9,6 @@ public interface SortingStrategy {
 
     void sort(List<Client> clients);
     void sortWithComparator(List<Client> clients, Comparator<Client> comparator);
+    void sortEvenValuesOnly(List<Client> clients, Comparator<Client> comparator);
     String getStrategyName();
 }
