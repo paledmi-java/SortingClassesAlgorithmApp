@@ -99,4 +99,38 @@ public class MergeSortStrategy implements SortingStrategy {
             clients.set(left + k, temp.get(k));
         }
     }
+
+    @Override
+    public void sortEvenValuesOnly(List<Client> clients, Comparator<Client> comparator) {
+        if (clients == null || clients.isEmpty()) {
+            return;
+        }
+
+        // Создаем список для хранения элементов с четными idNumber и их индексов
+        List<Client> evenClients = new ArrayList<>();
+        List<Integer> evenIndices = new ArrayList<>();
+
+        // Собираем все элементы с четными idNumber и запоминаем их индексы
+        for (int i = 0; i < clients.size(); i++) {
+            Client client = clients.get(i);
+            if (client.getIdNumber() % 2 == 0) {
+                evenClients.add(client);
+                evenIndices.add(i);
+            }
+        }
+
+        // Если нет элементов с четными значениями, ничего не делаем
+        if (evenClients.isEmpty()) {
+            return;
+        }
+
+        // Сортируем только элементы с четными значениями
+        sortWithComparator(evenClients, comparator);
+
+        // Возвращаем отсортированные элементы на исходные позиции
+        for (int i = 0; i < evenClients.size(); i++) {
+            int originalIndex = evenIndices.get(i);
+            clients.set(originalIndex, evenClients.get(i));
+        }
+    }
 }
