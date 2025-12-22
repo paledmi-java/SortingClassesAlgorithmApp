@@ -4,69 +4,68 @@ public interface Printable {
 
     default void printMainMenu(){
         System.out.println(
-                "1) Fill the client database\n" +
-                        "2) Show sorting options" +
-                            "3) Exit"
+                "1) Наполнить клиентскую базу\n" +
+                        "2) Показать параметры сортировки" +
+                            "0) Выход"
         );
     }
 
     default void printFillingDatabaseMenu(){
         System.out.println(
-                "Fill database: \n" +
-                        "1) Manual input\n" +
-                        "2) File\n" +
-                        "3) Random"
+                "Заполнить базу данных: \n" +
+                        "1) Ручной ввод\n" +
+                        "2) Файлом\n" +
+                        "3) Случайный набор" +
+                        "0) Возврат в главное меню"
         );
     }
 
     default void printSortingMenu(){
         System.out.println(
-                "Chose an option:\n" +
-                        "1) Show clients in default order\n" +
-                        "2) Sort by name\n" +
-                        "3) Sort by ID\n" +
-                        "4) Sort by phone number"
+                "Выберите вариант:\n" +
+                        "1) Отображать клиентов в порядке по умолчанию\n" +
+                        "2) Сортировать по имени\n" +
+                        "3) Сортировать по ID\n" +
+                        "4) Сортировать по номеру телефона" +
+                        "0) Возврат в главное меню"
         );
     }
 
     default void printNameSortingOptions(){
         System.out.println(
-                "Sort clients by:\n" +
-                        "1) Names alphabet order\n" +
-                        "2) Name length\n" +
-                        "3) Amount of vowels in name\n" +
-                        "4) Amount of consonants in name\n" +
-                        "5) Name unicode\n" +
-                        "6) Combine name criteria\n" + // Придумать что-то комбинированное
-                        "0) Go back"
+                "Сортировать клиентов:\n" +
+                        "1) По алфавитному порядку\n" +
+                        "2) По длине имени\n" +
+                        "3) По количеству гласных в имени\n" +
+                        "4) По количеству согласных в имени\n" +
+                        "5) По имени в кодировке unicode\n" +
+                        "0) Назад"
         );
     }
 
     default void printIdSortingOptions(){
         System.out.println(
-                "Sort clients by:\n" +
-                        "1) ID Ascending \n" +
-                        "2) ID Descending \n" +
-                        "3) Amount of numbers in ID\n" +
-                        "4) ID even number\n" + // ЭТО ДОП ЗАДАНИЕ
-                        "5) ID odd number\n" + // ЭТО ДОП ЗАДАНИЕ
-                        "6) Unicode\n" +
-                        "7) Combine criteria\n" +
-                        "9) ID creation date" // если сделать ID включающим дату
+                "Сортировать клиентов:\n" +
+                        "1) По возрастанию ID \n" +
+                        "2) По уменьшению ID \n" +
+                        "3) По количеству цифр в ID\n" +
+                        "4) По четным ID\n" + // ЭТО ДОП ЗАДАНИЕ
+                        "5) По нечетным ID\n" + // ЭТО ДОП ЗАДАНИЕ
+                        "6) По кодировке unicode\n" +
+                        "0) Назад"
 
         );
     }
 
     default void printPhoneSortingOptions(){
         System.out.println(
-                "Sort clients by phone:\n" +
-                        "1) Normalized number\n" + // приведенный к международному формату
-                        "2) Country code\n" +
-                        "3) Operator code\n" +
-                        "4) Last numbers\n" +
-                        "5) Number length\n" +
-                        "6) Clean number\n" + // без знаков
-                        "7) Combine criteria\n"
+                "Сортировать клиентов:\n" +
+                        "1) По номеру телефона в международном формате\n" + // приведенный к международному формату
+                        "2) По городскому коду\n" +
+                        "3) По коду оператора\n" +
+                        "4) По последним цифрам в номере телефона\n" +
+                        "5) По длине номера телефона\n" +
+                        "0) Назад"
 
         );
     }

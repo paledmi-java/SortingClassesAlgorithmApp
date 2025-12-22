@@ -23,7 +23,7 @@ public class MenuManager implements Printable {
                 switch (mainOption){
                     case 1 -> printFillingDatabaseMenu();
                     case 2 -> printSortingMenu();
-                    case 3 -> exitByChoice();
+                    case 0 -> exitByChoice();
                     default -> System.out.println("Неверный выбор. Пожалуйста, выберите 1, 2 или 3");
                 }
             } catch (Exception e){
@@ -83,7 +83,7 @@ public class MenuManager implements Printable {
                     case 2 -> printNameSortingOptions();
                     case 3 -> printIdSortingOptions();
                     case 4 -> printPhoneSortingOptions();
-                    case 5 -> {
+                    case 0 -> {
                         System.out.println("Возврат в главное меню...");
                         backToMain = true;
                     }
@@ -114,8 +114,8 @@ public class MenuManager implements Printable {
                     case 1 -> sortByNameAlphabet();
                     case 2 -> sortByNameLength();
                     case 3 -> sortByAmountVowelsOfName();
-                    case 4 -> {
-                        System.out.println("Возврат в главное меню...");
+                    case 0 -> {
+                        System.out.println("Назад...");
                         backToMain = true;
                     }
                     default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
@@ -145,8 +145,8 @@ public class MenuManager implements Printable {
                     case 1 -> sortIDByAscending();
                     case 2 -> sortIDByDescending();
                     case 3 -> sortIDByAmountOfNumbers();
-                    case 4 -> {
-                        System.out.println("Возврат в главное меню...");
+                    case 0 -> {
+                        System.out.println("Назад...");
                         backToMain = true;
                     }
                     default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
@@ -176,8 +176,8 @@ public class MenuManager implements Printable {
                     case 1 -> sortPhoneByNormalizedFormat();
                     case 2 -> sortPhoneByCountryCode();
                     case 3 -> sortPhoneByOperatorCode();
-                    case 4 -> {
-                        System.out.println("Возврат в главное меню...");
+                    case 0 -> {
+                        System.out.println("Назад...");
                         backToMain = true;
                     }
                     default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
