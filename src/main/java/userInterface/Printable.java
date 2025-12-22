@@ -5,7 +5,8 @@ public interface Printable {
     default void printMainMenu(){
         System.out.println(
                 "1) Fill the client database\n" +
-                        "2) Show sorting options"
+                        "2) Show sorting options" +
+                            "3) Exit"
         );
     }
 
