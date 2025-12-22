@@ -13,13 +13,28 @@ import java.util.stream.Stream;
  *
  * <p>Реализует интерфейс {@link Iterable} для поддержки for-each циклов и стримов.
  *
+ * <p>Основные возможности:</p>
+ * <ul>
+ *   <li>Динамическое расширение при добавлении элементов</li>
+ *   <li>Поддержка операций добавления, удаления, получения и замены элементов</li>
+ *   <li>Итерация через for-each циклы и итераторы</li>
+ *   <li>Поддержка Stream API</li>
+ *   <li>Добавление всех элементов из другой коллекции</li>
+ * </ul>
+ *
  * @param <T> тип элементов, хранимых в коллекции
  */
 public class CustomCollection<T> implements Iterable<T> {
+    /** Коэффициент увеличения емкости при расширении массива. */
     private static final float GROWTH_FACTOR = 1.5f;
+
+    /** Начальная емкость по умолчанию при создании коллекции без указания размера. */
     private static final int DEFAULT_CAPACITY = 10;
 
+    /** Внутренний массив для хранения элементов коллекции. */
     private Object[] elements;
+
+    /** Количество фактически хранящихся элементов в коллекции. */
     private int size;
 
     public CustomCollection() {
@@ -32,8 +47,6 @@ public class CustomCollection<T> implements Iterable<T> {
         }
         this.elements = new Object[initialCapacity];
     }
-
-    // TODO Конструктор из существующей коллекции, копирует все элементы с ёмкостью равной ёмкости коллекции
 
     public boolean add(T element) {
         // Проверяем достаточно ли места для добавления
@@ -77,14 +90,14 @@ public class CustomCollection<T> implements Iterable<T> {
 
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index cannot be less then 0 or more then " + size);
+            throw new IndexOutOfBoundsException("Индекс не может быть меньше 0 или больше " + size);
         }
         return (T) elements[index];
     }
 
     public T set(int index, T element) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index cannot be less then 0 or more then " + size);
+            throw new IndexOutOfBoundsException("Индекс не может быть меньше 0 или больше " + size);
         }
 
         T old = (T) elements[index];
@@ -108,6 +121,9 @@ public class CustomCollection<T> implements Iterable<T> {
      *
      * <p>Порядок элементов в целевой коллекции соответствует порядку,
      * в котором они возвращаются итератором указанной коллекции.
+     *
+     * <p>Поведение этого метода не определено, если указанная коллекция изменяется
+     * в процессе выполнения операции.
      *
      * @param collection коллекция, содержащая элементы для добавления
      * @return {@code true} если эта коллекция изменилась в результате вызова
@@ -145,18 +161,37 @@ public class CustomCollection<T> implements Iterable<T> {
         return new CustomArrayIterator();
     }
 
-    // Внутренний клас для итератора
+    /**
+     * Внутренний класс итератора для CustomCollection.
+     * Реализует fail-fast поведение: выбрасывает {@link IllegalStateException}
+     * при попытке удаления без предварительного вызова {@link #next()}.
+     */
     class CustomArrayIterator implements Iterator<T> {
-        private int cursor = 0; // текущая позиция
-        private int lastRet = -1; // индекс последнего возвращенного элемента
+        /** Текущая позиция итератора в массиве элементов. */
+        private int cursor = 0;
+
+        /** Индекс последнего возвращенного элемента; -1 если элемент не был возвращен или был удален. */
+        private int lastRet = -1;
 
         public CustomArrayIterator() {
         }
 
+        /**
+         * Проверяет, существует ли следующий элемент для итерации.
+         *
+         * @return {@code true} если итерация содержит больше элементов,
+         *         {@code false} в противном случае
+         */
         public boolean hasNext() {
             return cursor < size;
         }
 
+        /**
+         * Возвращает следующий элемент в итерации.
+         *
+         * @return следующий элемент в итерации
+         * @throws NoSuchElementException если итерация не содержит больше элементов
+         */
         public T next() {
             if (!hasNext()) {
                 throw new NoSuchElementException("Элемент отсутствует");
@@ -168,6 +203,12 @@ public class CustomCollection<T> implements Iterable<T> {
             return element;
         }
 
+        /**
+         * Удаляет из коллекции последний элемент, возвращенный этим итератором.
+         *
+         * @throws IllegalStateException если метод {@link #next} еще не был вызван,
+         *         или метод {@link #remove} уже был вызван после последнего вызова {@link #next}
+         */
         public void remove() {
             if (lastRet == -1) {
                 throw new IllegalStateException();
