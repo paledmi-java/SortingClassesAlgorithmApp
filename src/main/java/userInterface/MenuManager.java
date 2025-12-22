@@ -24,13 +24,12 @@ public class MenuManager implements Printable {
                     case 1 -> printFillingDatabaseMenu();
                     case 2 -> printSortingMenu();
                     case 0 -> exitByChoice();
-                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите 1, 2 или 3");
+                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите 1, 2 или 0");
                 }
             } catch (Exception e){
                 System.out.println("Ошибка: " + e.getMessage());
                 System.out.println("Пожалуйста, введите корректный номер опции.");
             }
-            scanner.close();
         }
     }
 
@@ -87,7 +86,7 @@ public class MenuManager implements Printable {
                         System.out.println("Возврат в главное меню...");
                         backToMain = true;
                     }
-                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
+                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 0 до 4");
                 }
             } catch (NumberFormatException e){
                 System.out.println("Пожалуйста, введите цифру для выбора действия.");
@@ -118,7 +117,7 @@ public class MenuManager implements Printable {
                         System.out.println("Назад...");
                         backToMain = true;
                     }
-                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
+                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 0 до 3");
                 }
             } catch (NumberFormatException e){
                 System.out.println("Пожалуйста, введите цифру для выбора действия.");
@@ -149,7 +148,7 @@ public class MenuManager implements Printable {
                         System.out.println("Назад...");
                         backToMain = true;
                     }
-                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
+                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 0 до 3");
                 }
             } catch (NumberFormatException e){
                 System.out.println("Пожалуйста, введите цифру для выбора действия.");
@@ -180,7 +179,7 @@ public class MenuManager implements Printable {
                         System.out.println("Назад...");
                         backToMain = true;
                     }
-                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 1 до 5");
+                    default -> System.out.println("Неверный выбор. Пожалуйста, выберите от 0 до 3");
                 }
             } catch (NumberFormatException e){
                 System.out.println("Пожалуйста, введите цифру для выбора действия.");
@@ -227,7 +226,6 @@ public class MenuManager implements Printable {
     private void fillManually(){
         System.out.println("Выбран способ ввода данных вручную");
         System.out.println("Введите данные...");
-        scanner.nextLine();
         System.out.println("Данные успешно сохранены");
 
     }
@@ -253,6 +251,7 @@ public class MenuManager implements Printable {
     private void exitByChoice(){
         System.out.println("Выход из программы...");
         running = false;
+        scanner.close();
     }
 
     private int inputLengthOfValue(String prompt, int defaultValue){
