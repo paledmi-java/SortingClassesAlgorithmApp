@@ -60,21 +60,26 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
         int clientNumber = 1;
 
         while (true) {
-            if(userIds.size() == 1000) {
+            if (userIds.size() == 1000) {
                 System.out.println("Достигнут лимит клиентов");
                 break;
             }
 
             System.out.println("Ввод клиент №" + clientNumber);
 
-            if (!promptForConfirmation("Добавляем клиента?")) {
-                break;
-            }
+            try {
+                if (!promptForConfirmation("Добавляем клиента?")) {
+                    break;
+                }
 
-            Client client = inputClient(clientNumber);
-            if (client != null) {
-                clients.add(client);
-                clientNumber++;
+                Client client = inputClient(clientNumber);
+                if (client != null) {
+                    clients.add(client);
+                    clientNumber++;
+                }
+            } catch (StopInputException e) {
+                System.out.println("\nВвод прерван пользователем. Текущий клиент не добавлен.");
+                break;
             }
         }
         System.out.println("\n Ввод завершен. Добавлено клиентов: " + clients.size());
@@ -88,43 +93,55 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
      *
      * @param clientNumber порядковый номер клиента (для отображения в интерфейсе)
      * @return объект {@link Client} с введенными данными или {@code null},
-     *         если пользователь отменил ввод
+     * если пользователь отменил ввод
      */
     private Client inputClient(int clientNumber) {
-        String name = promptForName();
-        String phone = promptForNumber();
-        int id = promptForId();
+        try {
+            String name = promptForName();
+            String phone = promptForNumber();
+            int id = promptForId();
 
-        Client.ClientBuilder builder = new Client.ClientBuilder().name(name)
-                .phoneNumber(phone)
-                .idNumber(id);
+            Client.ClientBuilder builder = new Client.ClientBuilder().name(name)
+                    .phoneNumber(phone)
+                    .idNumber(id);
 
-        System.out.println("\nВы ввели:");
-        System.out.println("  Имя: " + name);
-        System.out.println("  Телефон: " + phone);
-        System.out.println("  ID: " + id);
+            System.out.println("\nВы ввели:");
+            System.out.println("  Имя: " + name);
+            System.out.println("  Телефон: " + phone);
+            System.out.println("  ID: " + id);
 
-        if (promptForConfirmation("Все верно?")) {
-            return builder.build();
-        } else {
-            System.out.println("Отмена ввода этого клиента");
-            return null;
+            if (promptForConfirmation("Все верно?")) {
+                return builder.build();
+            } else {
+                System.out.println("Отмена ввода этого клиента");
+                return null;
+            }
+        } catch (StopInputException e) {
+            throw e;
         }
     }
 
     private String promptForName() {
-        return promptForString("Введите имя", true);
+        try {
+            return promptForString("Введите имя", true);
+        } catch (StopInputException e) {
+            throw e;
+        }
     }
 
     private String promptForNumber() {
         while (true) {
-            String phone = promptForString("Введите номер телефона в формате +7XXXXXXXXXX", true);
+            try {
+                String phone = promptForString("Введите номер телефона в формате +7XXXXXXXXXX", true);
 
-            if (phone.matches("^\\+7\\d{10}$")) {
-                return phone;
-            } else {
-                System.out.println("⚠️  Неверный формат телефона! Пример: +79991234567");
-                System.out.println("    Должно начинаться с +7 и содержать 11 цифр");
+                if (phone.matches("^\\+7\\d{10}$")) {
+                    return phone;
+                } else {
+                    System.out.println("⚠️  Неверный формат телефона! Пример: +79991234567");
+                    System.out.println("    Должно начинаться с +7 и содержать 11 цифр");
+                }
+            } catch (StopInputException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -148,6 +165,8 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
 
                 userIds.add(id);
                 return id;
+            } catch (StopInputException e) {
+                throw e;
             } catch (NumberFormatException e) {
                 System.out.println("ID должен быть целым числом");
             }
@@ -168,19 +187,24 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
      *
      * @param message сообщение с вопросом для подтверждения
      * @return {@code true} если пользователь подтвердил действие,
-     *         {@code false} если отказался
+     * {@code false} если отказался
      */
     private boolean promptForConfirmation(String message) {
         while (true) {
-            System.out.print(message + " (да/нет): ");
+            System.out.print(message + " (да/д/yes/y  или нет/н/no/n): ");
             String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equalsIgnoreCase("стоп")) {
+                throw new StopInputException();
+            }
+
             if (input.equals("да") || input.equals("д") || input.equals("y") || input.equals("yes")) {
                 return true;
             }
             if (input.equals("нет") || input.equals("н") || input.equals("n") || input.equals("no")) {
                 return false;
             }
-            System.out.println("⚠️  Пожалуйста, введите 'да' или 'нет'");
+            System.out.println("⚠️  Пожалуйста, введите 'да/д/yes/y' или 'нет/н/no/n'");
         }
     }
 
@@ -191,16 +215,20 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
      * <p>Если поле является обязательным ({@code required = true}),
      * метод будет продолжать запрашивать ввод до получения непустой строки.</p>
      *
-     * @param message сообщение с описанием запрашиваемых данных
+     * @param message  сообщение с описанием запрашиваемых данных
      * @param required флаг, указывающий является ли поле обязательным для заполнения
      * @return введенная пользователем строка (без начальных и конечных пробелов)
      */
-    private String promptForString(String message, boolean required)  {
+    private String promptForString(String message, boolean required) {
         while (true) {
             System.out.print(message + ": ");
 
             try {
                 String input = scanner.nextLine().trim();
+
+                if (input.equalsIgnoreCase("стоп")) {
+                    throw new StopInputException();
+                }
 
                 if (required && input.isEmpty()) {
                     System.out.println("⚠️  Это поле обязательно для заполнения!");
@@ -209,9 +237,18 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
 
                 return input;
             } catch (Exception e) {
+                if (e instanceof StopInputException) {
+                    throw e; // Пробрасываем дальше
+                }
                 System.out.println("Ошибка ввода: " + e.getMessage());
                 scanner.nextLine(); // Очистка буфера
             }
+        }
+    }
+
+    class StopInputException extends RuntimeException {
+        public StopInputException() {
+            super("Ввод прерван пользователем");
         }
     }
 }
