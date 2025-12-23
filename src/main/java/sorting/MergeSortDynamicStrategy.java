@@ -2,9 +2,9 @@ package sorting;
 
 import dto.Client;
 import enums.Field;
+import input.CustomCollection;
 
 import java.util.Comparator;
-import java.util.List;
 
 public class MergeSortDynamicStrategy extends AbstractMergeSortStrategy{
     private final Field field;
@@ -16,21 +16,23 @@ public class MergeSortDynamicStrategy extends AbstractMergeSortStrategy{
     }
 
     @Override
-    public void sort(List<Client> clients) {
-        Comparator<Client> comparator = createComparatorForField();
-        if (!ascending) {
-            comparator = comparator.reversed();
-        }
-        sortWithComparator(clients, comparator);
+    public void sort(CustomCollection<Client> clients) {
+        sortWithComparator(clients, getComparator());
     }
 
-    public Comparator<Client> createComparatorForField(){
-        return switch (field){
+    public Comparator<Client> getComparator(){
+        Comparator<Client> comparator = switch (field){
             case NAME -> Comparator.comparing(Client :: getName);
             case ID_NUMBER -> Comparator.comparing(Client :: getIdNumber);
             case PHONE_NUMBER -> Comparator.comparing(Client :: getPhoneNumber);
             default -> throw new IllegalArgumentException("Неизвестное поле: " + field);
         };
+
+        if (ascending) {
+            return comparator;
+        } else {
+            return comparator.reversed();
+        }
     }
 
     @Override

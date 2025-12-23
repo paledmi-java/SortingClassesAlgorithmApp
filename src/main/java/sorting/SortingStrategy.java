@@ -1,12 +1,12 @@
 package sorting;
 
 import dto.Client;
-import java.util.Comparator;
-import java.util.List;
+import input.CustomCollection;
 
 public interface SortingStrategy {
 
 
-    void sort(List<Client> clients);
+    void sort(CustomCollection<Client> clients);
     String getStrategyName();
+    void sortEvenValuesOnly(CustomCollection<Client> clients);
 }

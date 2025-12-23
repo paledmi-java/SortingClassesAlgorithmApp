@@ -1,5 +1,7 @@
 package userInterface;
 
+import enums.Field;
+
 import java.util.Scanner;
 
 public class MenuManager implements Printable {
@@ -130,6 +132,7 @@ public class MenuManager implements Printable {
 
     @Override
     public void printNameSortingOptions() {
+        appController.startDynamicSorting(Field.NAME);
         boolean backToMain = false;
         while (!backToMain && running) {
             Printable.super.printNameSortingOptions();
@@ -139,6 +142,7 @@ public class MenuManager implements Printable {
 
     @Override
     public void printPhoneSortingOptions() {
+        appController.startDynamicSorting(Field.PHONE_NUMBER);
         boolean backToMain = false;
         while (!backToMain && running) {
             Printable.super.printPhoneSortingOptions();
@@ -147,10 +151,12 @@ public class MenuManager implements Printable {
     }
 
     private void sortIDByAscending() {
+        appController.startDynamicSorting(Field.ID_NUMBER);
         System.out.println("Клиенты отсортированы по возрастанию ID");
     }
 
     private void sortIDbyEven() {
+        appController.startEvenIdsSorting();
         System.out.println("Клиенты отсортированы по четным ID");
     }
 
@@ -180,7 +186,7 @@ public class MenuManager implements Printable {
 
     private void printDefaultOrder() {
         System.out.println("Список клиентов");
-        appController.showAllClientsInDefaultOrder();
+        appController.startDefaultSorting();
     }
 
     private void exitByChoice() {

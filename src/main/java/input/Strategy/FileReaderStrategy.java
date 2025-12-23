@@ -133,4 +133,8 @@ public class FileReaderStrategy implements ClientInputStrategy {
             return Optional.empty();
         }
     }
+
+    public String getFilePath() {
+        return filePath;
+    }
 }

@@ -1,35 +1,28 @@
 package sorting;
 
 import dto.Client;
+import input.CustomCollection;
 
 import java.util.Comparator;
-import java.util.List;
 
-public class MergeSortDefaultStrategy extends AbstractMergeSortStrategy{
+public class MergeSortDefaultStrategy extends AbstractMergeSortStrategy {
 
     @Override
-    public void sort(List<Client> clients) {
-        Comparator<Client> comparator = createDefaultComparator();
-        sortWithComparator(clients, comparator);
+    public void sort(CustomCollection<Client> clients) {
+        sortWithComparator(clients, getComparator());
     }
 
-    private Comparator<Client> createDefaultComparator() {
-        return new Comparator<Client>() {
-            @Override
-            public int compare(Client client1, Client client2) {
-                int nameComparison = client1.getName().compareTo(client2.getName());
-                if (nameComparison != 0) {
-                    return nameComparison;
-                }
+    protected Comparator<Client> getComparator() {
+        return (c1, c2) -> {
+            int nameComparison = c1.getName().compareTo(c2.getName());
+            if (nameComparison != 0) return nameComparison;
 
-                int idComparison = Integer.compare(client1.getIdNumber(), client2.getIdNumber());
-                if (idComparison != 0) {
-                    return idComparison;
-                }
+            int idComparison = Integer.compare(c1.getIdNumber(), c2.getIdNumber());
+            if (idComparison != 0) return idComparison;
 
-                return client1.getPhoneNumber().compareTo(client2.getPhoneNumber());
-            }
+            return c1.getPhoneNumber().compareTo(c2.getPhoneNumber());
         };
+
     }
 
     @Override

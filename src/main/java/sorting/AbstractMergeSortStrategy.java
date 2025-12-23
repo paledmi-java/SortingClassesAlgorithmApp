@@ -1,13 +1,13 @@
 package sorting;
 
 import dto.Client;
-import java.util.ArrayList;
+import input.CustomCollection;
+
 import java.util.Comparator;
-import java.util.List;
 
 public abstract class AbstractMergeSortStrategy implements SortingStrategy {
 
-    public void sortWithComparator(List<Client> clients, Comparator<Client> comparator) {
+    public void sortWithComparator(CustomCollection<Client> clients, Comparator<Client> comparator) {
         if (clients == null || clients.size() <= 1) {
             return;
         }
@@ -15,12 +15,14 @@ public abstract class AbstractMergeSortStrategy implements SortingStrategy {
         mergeSort(clients, 0, clients.size() - 1, comparator);
     }
 
+    protected abstract Comparator<Client> getComparator();
+
     @Override
     public String getStrategyName() {
         return "Abstract Merge Sort (сортировка слиянием)";
     }
 
-    private void mergeSort(List<Client> clients, int left, int right,
+    private void mergeSort(CustomCollection<Client> clients, int left, int right,
                            Comparator<Client> comparator) {
 
         if (left < right) {
@@ -35,10 +37,10 @@ public abstract class AbstractMergeSortStrategy implements SortingStrategy {
     }
 
 
-    private void merge(List<Client> clients, int left, int mid, int right,
+    private void merge(CustomCollection<Client> clients, int left, int mid, int right,
                        Comparator<Client> comparator) {
 
-        List<Client> temp = new ArrayList<>();
+        CustomCollection<Client> temp = new CustomCollection<>();
 
         int i = left;
         int j = mid + 1;
@@ -76,14 +78,18 @@ public abstract class AbstractMergeSortStrategy implements SortingStrategy {
         }
     }
 
-    public void sortEvenValuesOnly(List<Client> clients, Comparator<Client> comparator) {
+    public void sortEvenValuesOnly(CustomCollection<Client> clients) {
+        sortEvenValuesOnly(clients, getComparator());
+    }
+
+    public void sortEvenValuesOnly(CustomCollection<Client> clients, Comparator<Client> comparator) {
         if (clients == null || clients.isEmpty()) {
             return;
         }
 
         // Создаем список для хранения элементов с четными idNumber и их индексов
-        List<Client> evenClients = new ArrayList<>();
-        List<Integer> evenIndices = new ArrayList<>();
+        CustomCollection<Client> evenClients = new CustomCollection<>();
+        CustomCollection<Integer> evenIndices = new CustomCollection<>();
 
         // Собираем все элементы с четными idNumber и запоминаем их индексы
         for (int i = 0; i < clients.size(); i++) {
