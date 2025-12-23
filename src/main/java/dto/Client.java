@@ -1,6 +1,6 @@
 package dto;
 
-public final class Client { //DTO
+public final class Client {
     private final String name;
     private final String phoneNumber;
     private final int idNumber;
@@ -47,5 +47,14 @@ public final class Client { //DTO
 
     public int getIdNumber() {
         return idNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", idNumber=" + idNumber +
+                '}';
     }
 }

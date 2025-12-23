@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MergeSortStrategy implements SortingStrategy {
-
-    @Override
-    public void sort(List<Client> clients) {
-        Comparator<Client> comparator = createDefaultComparator();
-        sortWithComparator(clients, comparator);
-    }
+public abstract class AbstractMergeSortStrategy implements SortingStrategy {
 
     public void sortWithComparator(List<Client> clients, Comparator<Client> comparator) {
         if (clients == null || clients.size() <= 1) {
@@ -23,27 +17,9 @@ public class MergeSortStrategy implements SortingStrategy {
 
     @Override
     public String getStrategyName() {
-        return "Merge Sort (сортировка слиянием)";
+        return "Abstract Merge Sort (сортировка слиянием)";
     }
 
-    private Comparator<Client> createDefaultComparator() {
-        return new Comparator<Client>() {
-            @Override
-            public int compare(Client client1, Client client2) {
-                int nameComparison = client1.getName().compareTo(client2.getName());
-                if (nameComparison != 0) {
-                    return nameComparison;
-                }
-
-                int idComparison = Integer.compare(client1.getIdNumber(), client2.getIdNumber());
-                if (idComparison != 0) {
-                    return idComparison;
-                }
-
-                return client1.getPhoneNumber().compareTo(client2.getPhoneNumber());
-            }
-        };
-    }
     private void mergeSort(List<Client> clients, int left, int right,
                            Comparator<Client> comparator) {
 
@@ -100,7 +76,6 @@ public class MergeSortStrategy implements SortingStrategy {
         }
     }
 
-    @Override
     public void sortEvenValuesOnly(List<Client> clients, Comparator<Client> comparator) {
         if (clients == null || clients.isEmpty()) {
             return;
