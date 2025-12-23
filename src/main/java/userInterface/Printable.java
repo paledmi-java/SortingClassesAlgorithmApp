@@ -5,12 +5,13 @@ public interface Printable {
     default void printMainMenu(){
         System.out.println(
                 "1) Наполнить клиентскую базу\n" +
-                        "2) Показать параметры сортировки" +
+                        "2) Показать параметры сортировки\n" +
                             "0) Выход"
         );
     }
 
     default void printFillingDatabaseMenu(){
+
         System.out.println("""
                 Заполнить базу данных:
                 1) Ручной ввод

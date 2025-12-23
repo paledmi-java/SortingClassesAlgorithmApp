@@ -1,6 +1,6 @@
 package input;
 
-public interface CollectionInterface<T> {
+public interface CollectionInterface<T> extends Iterable<String>{
     boolean add(T car); // important
     boolean remove(T car); // important
     boolean removeAt(int index);

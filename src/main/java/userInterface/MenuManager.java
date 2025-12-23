@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuManager implements Printable {
 
-
+    AppController appController = new AppController();
     private final Scanner scanner = new Scanner(System.in);
     private boolean running = true;
 
@@ -157,6 +157,7 @@ public class MenuManager implements Printable {
     private void fillManually() {
         System.out.println("Выбран способ ввода данных вручную");
         System.out.println("Введите данные...");
+        appController.startManualInputStrategy();
         System.out.println("Данные успешно сохранены");
 
     }
@@ -165,6 +166,7 @@ public class MenuManager implements Printable {
         System.out.println("Выбран способ ввода данных из файла\n");
         System.out.println("Введите путь к файлу: ");
         String filePath = scanner.nextLine().trim();
+        appController.startFileReaderStrategy(filePath);
         System.out.println("Загрузка из файла: " + filePath);
 
     }
@@ -172,11 +174,13 @@ public class MenuManager implements Printable {
     private void fillRandom() {
         System.out.println("Выбран способ ввода случайных данных");
         int count = inputLengthOfValue("Сколько записей создать? ", 10);
+        appController.startRandomDataStrategy(count);
         System.out.println("Создано: " + count + " записей");
     }
 
     private void printDefaultOrder() {
         System.out.println("Список клиентов");
+        appController.showAllClientsInDefaultOrder();
     }
 
     private void exitByChoice() {

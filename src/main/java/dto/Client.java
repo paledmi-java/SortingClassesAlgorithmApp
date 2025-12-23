@@ -48,4 +48,13 @@ public final class Client {
     public int getIdNumber() {
         return idNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", idNumber=" + idNumber +
+                '}';
+    }
 }
