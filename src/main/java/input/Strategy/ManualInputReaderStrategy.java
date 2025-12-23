@@ -246,7 +246,7 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
         }
     }
 
-    class StopInputException extends RuntimeException {
+    static class StopInputException extends RuntimeException {
         public StopInputException() {
             super("Ввод прерван пользователем");
         }
