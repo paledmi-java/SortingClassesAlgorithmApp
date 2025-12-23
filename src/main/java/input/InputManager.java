@@ -23,6 +23,7 @@ import java.io.IOException;
  * @see CustomCollection
  * @see Client
  */
+
 public class InputManager {
     private ClientInputStrategy currentStrategy;
 

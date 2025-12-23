@@ -123,4 +123,8 @@ public class RandomDataGeneratorStrategy implements ClientInputStrategy {
         userIds.add(id);
         return id;
     }
+
+    public int getCount() {
+        return count;
+    }
 }

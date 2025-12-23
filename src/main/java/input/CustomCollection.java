@@ -1,7 +1,8 @@
 package input;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 /**
@@ -128,7 +129,7 @@ public class CustomCollection<T> implements Iterable<T> {
      * @param collection коллекция, содержащая элементы для добавления
      * @return {@code true} если эта коллекция изменилась в результате вызова
      */
-    public boolean addAll(Collection<? extends T> collection) {
+    public boolean addAll(CustomCollection<? extends T> collection) {
         // Проверяем, что переданная коллекция не null и не пустая
         if (collection == null || collection.isEmpty()) {
             // Возвращаем false, так как нечего добавлять
