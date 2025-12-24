@@ -78,8 +78,11 @@ public abstract class AbstractMergeSortStrategy implements SortingStrategy {
         }
     }
 
+    @Override
     public void sortEvenValuesOnly(CustomCollection<Client> clients) {
-        sortEvenValuesOnly(clients, getComparator());
+        // Компаратор для сортировки по idNumber в натуральном порядке (по возрастанию)
+        Comparator<Client> idComparator = Comparator.comparing(Client::getIdNumber);
+        sortEvenValuesOnly(clients, idComparator);
     }
 
     public void sortEvenValuesOnly(CustomCollection<Client> clients, Comparator<Client> comparator) {
@@ -105,7 +108,7 @@ public abstract class AbstractMergeSortStrategy implements SortingStrategy {
             return;
         }
 
-        // Сортируем только элементы с четными значениями
+        // Сортируем только элементы с четными значениями по idNumber в натуральном порядке
         sortWithComparator(evenClients, comparator);
 
         // Возвращаем отсортированные элементы на исходные позиции

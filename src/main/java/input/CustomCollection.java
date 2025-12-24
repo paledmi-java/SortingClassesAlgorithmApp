@@ -39,6 +39,14 @@ public class CustomCollection<T> implements CollectionInterface<T> {
     /** Количество фактически хранящихся элементов в коллекции. */
     private int size;
 
+    public Object[] getElements() {
+        return elements;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
     public CustomCollection() {
         this.elements = new Object[DEFAULT_CAPACITY];
     }
