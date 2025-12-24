@@ -3,6 +3,7 @@ package input;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -49,7 +50,8 @@ public class CustomCollection<T> implements CollectionInterface<T> {
         this.elements = new Object[initialCapacity];
     }
 
-    public void add(T element) {
+    @Override
+    public boolean add(T element) {
         // Проверяем достаточно ли места для добавления
         if (size == elements.length) {
             // Если недостаточно, то увеличиваем размер списка
@@ -59,8 +61,10 @@ public class CustomCollection<T> implements CollectionInterface<T> {
         elements[size] = element;
         // Увеличиваем число элементов в массиве
         size++;
+        return true;
     }
 
+    @Override
     public void removeByIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index cannot be less then 0 or more then " + size);
@@ -81,7 +85,18 @@ public class CustomCollection<T> implements CollectionInterface<T> {
         elements[--size] = null;
     }
 
-    // Не используется можно удалить
+    @Override
+    public boolean remove(T element) {
+        for (int i = 0; i < size; i++) {
+            if(Objects.equals(element, elements[i])) {
+                removeByIndex(i);
+                return true;
+            }
+         }
+        return false;
+    }
+
+    @Override
     public void clear() {
         for (int i = 0; i < size; i++) {
             elements[i] = null;
@@ -89,12 +104,14 @@ public class CustomCollection<T> implements CollectionInterface<T> {
         size = 0;
     }
 
+    @Override
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Индекс не может быть меньше 0 или больше " + size);
         }
         return (T) elements[index];
     }
+
 
     public T set(int index, T element) {
         if (index < 0 || index >= size) {
@@ -113,6 +130,7 @@ public class CustomCollection<T> implements CollectionInterface<T> {
      *
      * @return последовательный {@code Stream} элементов этой коллекции
      */
+    @Override
     public Stream<T> stream() {
         return (Stream<T>) Arrays.stream(elements, 0, size);
     }
@@ -138,10 +156,12 @@ public class CustomCollection<T> implements CollectionInterface<T> {
         }
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
