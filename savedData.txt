@@ -1,0 +1,21 @@
+Client{name='Альберт Большаков', phoneNumber='+79141544234', idNumber=795}
+Client{name='Антон Германович Федосеев', phoneNumber='+79512917697', idNumber=47}
+Client{name='Белозерова Ольга', phoneNumber='+79132151876', idNumber=906}
+Client{name='Большакова Маргарита', phoneNumber='+79600176461', idNumber=358}
+Client{name='Виктория Гущина', phoneNumber='+79660851640', idNumber=872}
+Client{name='Даниил Маслов', phoneNumber='+79769435383', idNumber=861}
+Client{name='Денисова Юлия', phoneNumber='+79395588731', idNumber=328}
+Client{name='Елисеев Денис Егорович', phoneNumber='+79569043128', idNumber=762}
+Client{name='Кира Денисовна Гордеева', phoneNumber='+79369345223', idNumber=97}
+Client{name='Комарова Дарья Макаровна', phoneNumber='+79009560450', idNumber=538}
+Client{name='Лобанов Вячеслав Васильевич', phoneNumber='+79633737514', idNumber=122}
+Client{name='Марина Альбертовна Белова', phoneNumber='+79111698201', idNumber=942}
+Client{name='Матвей Горбунов', phoneNumber='+79544728055', idNumber=172}
+Client{name='Матвей Григорьевич Ефремов', phoneNumber='+79467628131', idNumber=266}
+Client{name='Осипов Степан Макарович', phoneNumber='+79600704787', idNumber=290}
+Client{name='Савина Лариса Дмитриевна', phoneNumber='+79024370933', idNumber=22}
+Client{name='Смирнов Никита Лаврентьевич', phoneNumber='+79956621645', idNumber=691}
+Client{name='Соколова Татьяна', phoneNumber='+79988936291', idNumber=758}
+Client{name='Чернов Борис Геннадьевич', phoneNumber='+79574148315', idNumber=697}
+Client{name='Ярослав Георгиевич Максимов', phoneNumber='+79171026484', idNumber=964}
+
