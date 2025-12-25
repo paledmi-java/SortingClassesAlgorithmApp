@@ -4,6 +4,9 @@ import dto.Client;
 import enums.Field;
 import input.CustomCollection;
 import input.InputManager;
+import input.strategy.FileReaderStrategy;
+import input.strategy.ManualInputReaderStrategy;
+import input.strategy.RandomDataGeneratorStrategy;
 import output.FileDataWriter;
 import sorting.MergeSortDefaultStrategy;
 import sorting.MergeSortDynamicStrategy;
@@ -50,7 +53,7 @@ public class AppController {
     }
 
     public void startFileReaderStrategy(String path){
-        inputManager.setStrategy(inputManager.createFileStrategy(path));
+        inputManager.setStrategy(new FileReaderStrategy(path));
         try {
             CustomCollection<Client> fromFileList = inputManager.loadData();
             int countOfAlexes = concurrentCounter.countAlexes(fromFileList);
@@ -65,7 +68,7 @@ public class AppController {
     }
 
     public void startManualInputStrategy(){
-        inputManager.setStrategy(inputManager.createManualStrategy());
+        inputManager.setStrategy(new ManualInputReaderStrategy());
         try {
             CustomCollection<Client> manualList = inputManager.loadData();
             int countOfAlexes = concurrentCounter.countAlexes(manualList);
@@ -80,7 +83,7 @@ public class AppController {
     }
 
     public void startRandomDataStrategy(int count){
-        inputManager.setStrategy(inputManager.createRandomStrategy(count));
+        inputManager.setStrategy(new RandomDataGeneratorStrategy(count));
         try {
             CustomCollection<Client> randomList = inputManager.loadData();
             int countOfAlexes = concurrentCounter.countAlexes(randomList);
