@@ -4,14 +4,13 @@ import dto.Client;
 import enums.Field;
 import input.CustomCollection;
 import input.InputManager;
-import input.strategy.FileReaderStrategy;
 import input.strategy.ManualInputReaderStrategy;
-import input.strategy.RandomDataGeneratorStrategy;
 import output.FileDataWriter;
 import sorting.MergeSortDefaultStrategy;
 import sorting.MergeSortDynamicStrategy;
 import sorting.SortingManager;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AppController {
@@ -31,7 +30,7 @@ public class AppController {
     public void startEvenIdsSorting(){
         sortingManager.setStrategy(new MergeSortDefaultStrategy());
         sortingManager.getCurrentStrategy().sortEvenValuesOnly(fullList);
-        showAndWriteAllClients();
+        showAndWriteEvenClients(fullList);
     }
 
     public void startDynamicSorting(Field field){
@@ -52,8 +51,18 @@ public class AppController {
         fileDataWriter.writeDataToFile("\n");
     }
 
+    public void showAndWriteEvenClients(CustomCollection<Client> clients){
+        for(Client client : clients){
+            if (client.getIdNumber() % 2 == 0){
+                System.out.println(client);
+                fileDataWriter.writeDataToFile(client + "\n");
+            }
+        }
+        fileDataWriter.writeDataToFile("\n");
+    }
+
     public void startFileReaderStrategy(String path){
-        inputManager.setStrategy(new FileReaderStrategy(path));
+        inputManager.setStrategy(inputManager.createFileStrategy(path));
         try {
             CustomCollection<Client> fromFileList = inputManager.loadData();
             int countOfAlexes = concurrentCounter.countAlexes(fromFileList);
@@ -65,10 +74,12 @@ public class AppController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("File path: " + path);
+        System.out.println("File exists: " + new File(path).exists());
     }
 
     public void startManualInputStrategy(){
-        inputManager.setStrategy(new ManualInputReaderStrategy());
+        inputManager.setStrategy(inputManager.createManualStrategy());
         try {
             CustomCollection<Client> manualList = inputManager.loadData();
             int countOfAlexes = concurrentCounter.countAlexes(manualList);
@@ -83,7 +94,7 @@ public class AppController {
     }
 
     public void startRandomDataStrategy(int count){
-        inputManager.setStrategy(new RandomDataGeneratorStrategy(count));
+        inputManager.setStrategy(inputManager.createRandomStrategy(count));
         try {
             CustomCollection<Client> randomList = inputManager.loadData();
             int countOfAlexes = concurrentCounter.countAlexes(randomList);
@@ -96,5 +107,24 @@ public class AppController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void startManualInputStrategy(ManualInputReaderStrategy strategy){
+        inputManager.setStrategy(strategy);
+        try {
+            CustomCollection<Client> manualList = inputManager.loadData();
+            int countOfAlexes = concurrentCounter.countAlexes(manualList);
+            fullList.addAll(manualList);
+            for(Client client : manualList){
+                System.out.println(client);
+            }
+            System.out.println("Добавлено Алексеев: " + countOfAlexes);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public InputManager getInputManager() {
+        return inputManager;
     }
 }

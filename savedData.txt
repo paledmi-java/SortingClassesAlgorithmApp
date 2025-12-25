@@ -1,0 +1,10 @@
+Client{name='Иван', phoneNumber='+79991234567', idNumber=2}
+Client{name='Пётр', phoneNumber='+79997654321', idNumber=1}
+
+Client{name='Мария', phoneNumber='+79992222222', idNumber=4}
+
+Client{name='Алексей', phoneNumber='+79994444444', idNumber=6}
+Client{name='Сергей', phoneNumber='+79993333333', idNumber=5}
+
+Client{name='ВыводТест', phoneNumber='+71111111111', idNumber=77}
+

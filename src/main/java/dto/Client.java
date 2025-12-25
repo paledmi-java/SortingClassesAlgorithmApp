@@ -35,6 +35,17 @@ public final class Client {
             return new Client(this);
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public int getIdNumber() {
+            return idNumber;
+        }
     }
 
     public String getName() {

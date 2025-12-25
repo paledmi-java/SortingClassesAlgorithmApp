@@ -64,4 +64,47 @@ public class InputManager {
         }
         return currentStrategy.getData();
     }
+
+    /**
+     * Создает стратегию для чтения данных из файла.
+     *
+     * <p>Файл должен содержать данные в формате:</p>
+     * <pre>
+     * Имя|Телефон|ID
+     * Иван Иванов|+79991234567|1
+     * </pre>
+     *
+     * @param filePath путь к файлу с данными о клиентах
+     * @return стратегия чтения из файла
+     * @throws IllegalArgumentException если {@code filePath} равен {@code null} или пуст
+     */
+    public FileReaderStrategy createFileStrategy(String filePath) {
+        if (filePath == null || filePath.trim().isEmpty()) {
+            throw new IllegalArgumentException("Путь к файлу не может быть null или пустым");
+        }
+        return new FileReaderStrategy(filePath);
+    }
+
+    /**
+     * Создает стратегию для ручного ввода данных через консоль.
+     *
+     * <p>Стратегия предоставляет интерактивный интерфейс для ввода данных
+     * о клиентах с валидацией и подтверждением.</p>
+     *
+     * @return стратегия ручного ввода
+     */
+    public ManualInputReaderStrategy createManualStrategy() {
+        return new ManualInputReaderStrategy();
+    }
+
+    /**
+     * Создает стратегию для генерации случайных данных о клиентах.
+     *
+     * @param count количество клиентов для генерации
+     * @return стратегия генерации случайных данных
+     * @throws IllegalArgumentException если {@code count} меньше или равен 0
+     */
+    public RandomDataGeneratorStrategy createRandomStrategy(int count) {
+        return new RandomDataGeneratorStrategy(count);
+    }
 }

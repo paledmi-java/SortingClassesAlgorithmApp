@@ -4,6 +4,7 @@ import dto.Client;
 import input.CustomCollection;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -32,6 +33,12 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
 
     public ManualInputReaderStrategy() {
         this.scanner = new Scanner(System.in);
+        this.userIds = new HashSet<>();
+    }
+
+
+    public ManualInputReaderStrategy(InputStream in) {
+        this.scanner = new Scanner(in); // создаём Scanner на переданном потоке
         this.userIds = new HashSet<>();
     }
 
