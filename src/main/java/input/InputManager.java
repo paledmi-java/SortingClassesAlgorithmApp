@@ -1,6 +1,6 @@
 package input;
 
-import input.Strategy.*;
+import input.strategy.*;
 import dto.Client;
 
 import java.io.IOException;

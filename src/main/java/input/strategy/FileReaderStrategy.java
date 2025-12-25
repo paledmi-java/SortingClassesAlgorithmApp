@@ -1,4 +1,4 @@
-package input.Strategy;
+package input.strategy;
 
 import dto.Client;
 import input.CustomCollection;

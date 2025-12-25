@@ -1,4 +1,4 @@
-package input.Strategy;
+package input.strategy;
 
 import com.github.javafaker.Faker;
 import dto.Client;
