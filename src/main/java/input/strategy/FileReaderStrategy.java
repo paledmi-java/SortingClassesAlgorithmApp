@@ -113,12 +113,12 @@ public class FileReaderStrategy implements ClientInputStrategy {
             }
 
             if (name.isEmpty()) {
-                System.out.println("Пустое имя" + line);
+                System.out.println("Пустое имя в строке: " + line);
                 return Optional.empty();
             }
 
             if (!phoneNumber.matches("^\\+7\\d{10}$")) {
-                System.out.println("Неверный формат номера телефона" + line);
+                System.out.println("Неверный формат номера телефона в строке: " + line);
                 return Optional.empty();
             }
 
@@ -129,7 +129,7 @@ public class FileReaderStrategy implements ClientInputStrategy {
             return Optional.of(builder);
 
         } catch (Exception e) {
-            System.out.println("Ошибка" + line);
+            System.out.println("Ошибка в строке: " + line);
             return Optional.empty();
         }
     }

@@ -1,12 +1,14 @@
 package input;
 
-public interface CollectionInterface<T> extends Iterable<String>{
-    boolean add(T car); // important
-    boolean remove(T car); // important
-    boolean removeAt(int index);
+import java.util.stream.Stream;
+
+public interface CollectionInterface<T> extends Iterable<T>{
+    boolean add(T element); // important
+    boolean remove(T element);// important
+    void removeByIndex(int index);
     void clear(); // important
     T get(int index);
-    boolean add(T car, int index);
     int size(); // important
-    boolean contains(T car);
+    boolean isEmpty();
+    Stream<T> stream();
 }
