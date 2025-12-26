@@ -30,7 +30,7 @@ public class AppController {
     public void startEvenIdsSorting(){
         sortingManager.setStrategy(new MergeSortDefaultStrategy());
         sortingManager.getCurrentStrategy().sortEvenValuesOnly(fullList);
-        showAndWriteEvenClients(fullList);
+        showAndWriteAllClients();
     }
 
     public void startDynamicSorting(Field field){
@@ -47,16 +47,6 @@ public class AppController {
         for(Client client : fullList){
             System.out.println(client);
             fileDataWriter.writeDataToFile(client + "\n");
-        }
-        fileDataWriter.writeDataToFile("\n");
-    }
-
-    public void showAndWriteEvenClients(CustomCollection<Client> clients){
-        for(Client client : clients){
-            if (client.getIdNumber() % 2 == 0){
-                System.out.println(client);
-                fileDataWriter.writeDataToFile(client + "\n");
-            }
         }
         fileDataWriter.writeDataToFile("\n");
     }

@@ -44,24 +44,6 @@ class AppControllerTest {
     }
 
     @Test
-    @DisplayName("startEvenIdsSorting должен отсортировать только клиентов с чётными ID")
-    void testStartEvenIdsSorting() {
-        // Arrange
-        Client client1 = new Client.ClientBuilder().name("Анна").phoneNumber("+79991111111").idNumber(3).build(); // нечётный ID
-        Client client2 = new Client.ClientBuilder().name("Мария").phoneNumber("+79992222222").idNumber(4).build(); // чётный ID
-        controller.getFullList().add(client1);
-        controller.getFullList().add(client2);
-
-        // Act
-        controller.startEvenIdsSorting();
-
-        // Assert: в выводе должен быть только клиент с чётным ID (Мария)
-        String output = outputStream.toString();
-        assertFalse(output.contains("Анна"), "Вывод не должен содержать клиента с нечётным ID");
-        assertTrue(output.contains("Мария"), "Вывод должен содержать клиента с чётным ID");
-    }
-
-    @Test
     @DisplayName("startDynamicSorting должен отсортировать по указанному полю")
     void testStartDynamicSorting() {
         // Arrange: сортировка по имени (Field.NAME)

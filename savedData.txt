@@ -1,10 +1,32 @@
-Client{name='Иван', phoneNumber='+79991234567', idNumber=2}
-Client{name='Пётр', phoneNumber='+79997654321', idNumber=1}
 
-Client{name='Мария', phoneNumber='+79992222222', idNumber=4}
-
-Client{name='Алексей', phoneNumber='+79994444444', idNumber=6}
-Client{name='Сергей', phoneNumber='+79993333333', idNumber=5}
-
-Client{name='ВыводТест', phoneNumber='+71111111111', idNumber=77}
+Client{name='Андреева Дарья', phoneNumber='+79384195474', idNumber=999}
+Client{name='Анжела Викторовна Блохина', phoneNumber='+79296568824', idNumber=661}
+Client{name='Анжелика Кошелева', phoneNumber='+79804707713', idNumber=78}
+Client{name='Антон Воронов', phoneNumber='+79938685129', idNumber=262}
+Client{name='Аркадий Игнатьевич Тихонов', phoneNumber='+79337132205', idNumber=23}
+Client{name='Бобылев Вячеслав', phoneNumber='+79549089324', idNumber=573}
+Client{name='Большаков Матвей Эдуардович', phoneNumber='+79051246042', idNumber=591}
+Client{name='Василиса Антоновна Лапина', phoneNumber='+79971387677', idNumber=853}
+Client{name='Вера Артёмовна Капустина', phoneNumber='+79591168118', idNumber=461}
+Client{name='Вероника Моисеева', phoneNumber='+79058575995', idNumber=889}
+Client{name='Виктор Леонидович Зиновьев', phoneNumber='+79272614762', idNumber=627}
+Client{name='Гаврилова Алла Владимировна', phoneNumber='+79303034501', idNumber=387}
+Client{name='Екатерина Филатова', phoneNumber='+79524244998', idNumber=669}
+Client{name='Ефремова Ольга Вячеславовна', phoneNumber='+79201039302', idNumber=778}
+Client{name='Игнатий Ильич Антонов', phoneNumber='+79946035137', idNumber=829}
+Client{name='Игнатьева Зинаида Вячеславовна', phoneNumber='+79468715374', idNumber=813}
+Client{name='Кулагин Дмитрий', phoneNumber='+79019463584', idNumber=93}
+Client{name='Лаврентьев Вячеслав Сергеевич', phoneNumber='+79639495445', idNumber=459}
+Client{name='Маргарита Викторовна Кузьмина', phoneNumber='+79571424972', idNumber=549}
+Client{name='Медведева Валентина', phoneNumber='+79282932301', idNumber=594}
+Client{name='Мухина Алина Сергеевна', phoneNumber='+79841015291', idNumber=296}
+Client{name='Мухина Раиса Валентиновна', phoneNumber='+79204742853', idNumber=512}
+Client{name='Оксана Кулагина', phoneNumber='+79538510155', idNumber=860}
+Client{name='Панфилова Арина', phoneNumber='+79678575110', idNumber=927}
+Client{name='Попов Роман Евгеньевич', phoneNumber='+79392077705', idNumber=996}
+Client{name='Русакова Валентина', phoneNumber='+79499915311', idNumber=3}
+Client{name='Субботина Евгения', phoneNumber='+79883134731', idNumber=275}
+Client{name='Фадеев Игорь Даниилович', phoneNumber='+79907800005', idNumber=194}
+Client{name='Фокин Матвей Витальевич', phoneNumber='+79274394409', idNumber=933}
+Client{name='Шаров Юрий', phoneNumber='+79408809462', idNumber=699}
 
