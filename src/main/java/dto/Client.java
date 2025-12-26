@@ -35,6 +35,17 @@ public final class Client {
             return new Client(this);
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public int getIdNumber() {
+            return idNumber;
+        }
     }
 
     public String getName() {
@@ -47,5 +58,14 @@ public final class Client {
 
     public int getIdNumber() {
         return idNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", idNumber=" + idNumber +
+                '}';
     }
 }
