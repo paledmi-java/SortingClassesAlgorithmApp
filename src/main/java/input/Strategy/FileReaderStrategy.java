@@ -117,6 +117,11 @@ public class FileReaderStrategy implements ClientInputStrategy {
                 return Optional.empty();
             }
 
+            if (!name.matches("^([А-ЯЁ][а-яё]+\\s){1,2}[А-ЯЁ][а-яё]+$")) {
+                System.out.println("Неверный формат имени " + line);
+                return Optional.empty();
+            }
+
             if (!phoneNumber.matches("^\\+7\\d{10}$")) {
                 System.out.println("Неверный формат номера телефона в строке: " + line);
                 return Optional.empty();
