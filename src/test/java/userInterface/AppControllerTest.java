@@ -100,8 +100,8 @@ class AppControllerTest {
 
         File testFile = new File("test_clients.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(testFile))) {
-            writer.write("Алексей|+79991112233|1\n");
-            writer.write("Мария|+79992223344|2\n");
+            writer.write("Алексей Петров|+79991112233|1\n");
+            writer.write("Мария Иванова|+79992223344|2\n");
         } catch (Exception e){
             throw new RuntimeException(e);
         }
