@@ -175,7 +175,7 @@ class ManualInputReaderStrategyTest {
         StringBuilder inputBuilder = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             inputBuilder.append("да\n");
-            inputBuilder.append("Клиент ").append(i).append("\n");
+            inputBuilder.append("Иван Иванов").append("\n");
             inputBuilder.append("+7").append(String.format("%010d", i)).append("\n");
             inputBuilder.append(i).append("\n");
             inputBuilder.append("да\n");

@@ -129,10 +129,19 @@ public class ManualInputReaderStrategy implements ClientInputStrategy {
     }
 
     private String promptForName() {
-        try {
-            return promptForString("Введите имя", true);
-        } catch (StopInputException e) {
-            throw e;
+        while (true) {
+            try {
+                String name = promptForString("Введите имя", true);
+
+                if (name.matches("^([А-ЯЁ][а-яё]+\\s){1,2}[А-ЯЁ][а-яё]+$")) {
+                    return name.trim().replaceAll("\\s+", " ");
+                } else {
+                    System.out.println("Неверный формат! Используйте: Фамилия Имя или Фамилия Имя Отчество");
+                }
+
+            } catch (StopInputException e) {
+                throw e;
+            }
         }
     }
 
